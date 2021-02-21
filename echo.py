@@ -1,6 +1,6 @@
 import logging 
 from telegram.ext import Updater, CommandHandler, MessageHandler, Filters
-from pytube import YouTube  
+
 # Enable logging
 logging.basicConfig(format='%(asctime)s - %(name)s - %(levelname)s - %(message)s',
                     level=logging.INFO)
@@ -13,7 +13,7 @@ logger = logging.getLogger(__name__)
 
 def echo(update, context):
     """Echo the user message."""
-    update.message.reply_text("Commands: start-help-words-video")
+    update.message.reply_text("Commands: start-help-words-video-41days")
 
 def start(update, context):
     """Send a message when the command /start is issued."""
@@ -25,27 +25,27 @@ def help(update, context):
 
 def todayvideo(update, context):
     """Send a message when the command /help is issued."""
-    update.message.reply_text('Video of the day: ')
+    update.message.reply_text('Video list: https://www.youtube.com/playlist?list=PLi35DK8T_m02xtqMe0EkucdUvdO6wjden')
 
-#kelime listesi eklenecek
+#word list
 def todaywords(update, context):
     """Send a message when the command /help is issued."""
-    update.message.reply_text('Words of the day')   
+    update.message.reply_text('@kelimeogren')   
 
+def _41days(update,video):
+    update.message.reply_text('https://www.youtube.com/playlist?list=PLi35DK8T_m03bnNmcVUk5sN8MXW-g__St')  
+
+
+    
 def error(update, context):
     """Log Errors caused by Updates."""
     logger.warning('Update "%s" caused error "%s"', update, context.error)
-
-def youtube(update,video):
-    pass
-
-
 
 def main():
     """Start the bot."""
     # Create the Updater and pass it your bot's token.
     # Make sure to set use_context=True to use the new context based callbacks
-    updater = Updater("1650742641:AAEXt2ZIekT49l9gH3OcPd0JDiW4UNins24", use_context=True)
+    updater = Updater("TOKEN", use_context=True)
 
     # Get the dispatcher to register handlers
     dp = updater.dispatcher
@@ -55,7 +55,7 @@ def main():
     dp.add_handler(CommandHandler("help", help))
     dp.add_handler(CommandHandler("video", todayvideo))
     dp.add_handler(CommandHandler("words", todaywords))
-    dp.add_handler(CommandHandler("youtube", youtube))
+    dp.add_handler(CommandHandler("41days", _41days))
     # on noncommand i.e message - echo the message on Telegram
     dp.add_handler(MessageHandler(Filters.text, echo))
 
